@@ -36,7 +36,7 @@ class ProductController extends Controller
         }
 
         // Sắp xếp và phân trang (12 sản phẩm mỗi trang)
-        $products = $query->orderBy('created_at', 'desc')->paginate(10);
+        $products = $query->orderBy('created_at', 'desc')->paginate(9);
 
         return view('client.product', compact('products', 'categories'));
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -29,13 +31,25 @@ class DashboardController extends Controller
         // Thống kê user đăng ký theo tháng (12 tháng gần nhất)
         $monthlyUserData = $this->getMonthlyUserRegistrations();
 
+        // Thống kê sản phẩm
+        $totalProducts = Product::count(); // Tổng số sản phẩm
+        $productsToday = Product::whereDate('created_at', Carbon::today())->count(); // Sản phẩm mới hôm nay
+        $productsThisMonth = Product::whereMonth('created_at', Carbon::now()->month)->count(); // Sản phẩm mới tháng này
+
+        // Thống kê danh mục
+        $totalCategories = Category::count(); // Tổng số danh mục
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'todayUsers',
             'monthUsers',
             'activeUsers',
             'inactiveUsers',
-            'monthlyUserData'
+            'monthlyUserData',
+            'totalProducts',
+            'productsToday',
+            'productsThisMonth',
+            'totalCategories'
         ));
     }
 
@@ -60,18 +74,5 @@ class DashboardController extends Controller
         }
 
         return $data;
-    }
-
-    /**
-     * API trả về dữ liệu thống kê user (dùng cho biểu đồ)
-     */
-    public function getUserStats()
-    {
-        $monthlyData = $this->getMonthlyUserRegistrations();
-
-        return response()->json([
-            'labels' => collect($monthlyData)->pluck('month'),
-            'data' => collect($monthlyData)->pluck('count')
-        ]);
     }
 }

@@ -9,6 +9,13 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -47,6 +54,14 @@
                     class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
                     <i class="fas fa-phone-alt mr-1"></i> Liên hệ
                 </a>
+                <!-- Kiểm tra nếu người dùng là admin -->
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                    <!-- Kiểm tra nếu người dùng đã đăng nhập và là admin -->
+                    <a href="/admin/dashboard"
+                        class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
+                        <i class="fas fa-cogs mr-1"></i> Quản trị
+                    </a>
+                @endif
             </nav>
 
             <!-- Avatar Dropdown -->

@@ -44,6 +44,9 @@ class ProductController extends Controller
         if ($data['stock'] == 0 && $data['status'] == 'available') {
             $data['status'] = 'out_of_stock';
         }
+        if ($data['stock'] > 0 && $data['status'] == 'out_of_stock') {
+            $data['status'] = 'available';
+        }
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -81,6 +84,9 @@ class ProductController extends Controller
         if ($data['stock'] == 0 && $data['status'] == 'available') {
             $data['status'] = 'out_of_stock';
         }
+        if ($data['stock'] > 0 && $data['status'] == 'out_of_stock') {
+            $data['status'] = 'available';
+        }
 
         // Nếu có ảnh mới, lưu ảnh và xóa ảnh cũ
         if ($request->hasFile('image')) {
@@ -104,6 +110,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Nếu sản phẩm có ảnh, thì xóa ảnh khỏi storage
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Xóa thành công');
     }

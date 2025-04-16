@@ -14,7 +14,7 @@ class HomeController extends Controller
         $latestProducts = Product::with('category')
             ->where('status', '!=', 'hidden')
             ->orderBy('created_at', 'desc')
-            ->take(3)
+            ->take(5)
             ->get();
 
         // Lấy tất cả sản phẩm với phân trang

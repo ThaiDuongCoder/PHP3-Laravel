@@ -17,7 +17,7 @@ class AdminMiddleware
         }
 
         if (Auth::user()->role !== 'admin') {
-            return redirect('/404')->with('error', 'Bạn không đủ quyền truy cập');
+            return redirect('/')->with('error', 'Bạn không đủ quyền truy cập');
         }
         return $next($request);
     }

@@ -1,15 +1,16 @@
+<!-- resources/views/admin/products/create.blade.php -->
 @extends('layouts.admin')
 
 @section('title', 'Thêm Sản Phẩm Mới')
 
 @section('content')
-    <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
         <!-- Tiêu đề + Nút quay lại -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-700">➕ Thêm Sản Phẩm Mới</h1>
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-700 mb-4 sm:mb-0">➕ Thêm Sản Phẩm Mới</h1>
             <a href="{{ route('admin.products.index') }}"
                 class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">
-                <i class="fas fa-arrow-left"></i> Quay lại
+                <i class="fas fa-arrow-left mr-2"></i> Quay lại
             </a>
         </div>
 
@@ -82,6 +83,7 @@
                 <select
                     class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200 @error('category_id') border-red-500 @enderror"
                     id="category_id" name="category_id">
+                    <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Chọn danh mục</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
@@ -110,8 +112,8 @@
             </div>
 
             <!-- Nút submit -->
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition">
-                <i class="fas fa-save"></i> Thêm sản phẩm
+            <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition">
+                <i class="fas fa-save mr-2"></i> Thêm sản phẩm
             </button>
         </form>
     </div>

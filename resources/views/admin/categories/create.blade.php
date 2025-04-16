@@ -1,3 +1,4 @@
+<!-- resources/views/admin/categories/create.blade.php -->
 @extends('layouts.admin')
 
 @section('title', 'Thêm danh mục mới')
@@ -5,11 +6,11 @@
 @section('content')
     <div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
         <!-- Tiêu đề + Nút quay lại -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-700">➕ Thêm danh mục mới</h1>
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-700 mb-4 sm:mb-0">➕ Thêm danh mục mới</h1>
             <a href="{{ route('admin.categories.index') }}"
                 class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">
-                🔙 Quay lại
+                <i class="fas fa-arrow-left mr-2"></i> Quay lại
             </a>
         </div>
 
@@ -21,8 +22,9 @@
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-medium">Tên danh mục <span
                         class="text-red-500">*</span></label>
-                <input type="text" id="name" name="name" class="w-full border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200
-                        @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Nhập tên danh mục">
+                <input type="text" id="name" name="name"
+                    class="w-full border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 @error('name') border-red-500 @enderror"
+                    value="{{ old('name') }}" placeholder="Nhập tên danh mục">
                 @error('name')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -31,8 +33,8 @@
             <!-- Mô tả -->
             <div class="mb-4">
                 <label for="description" class="block text-gray-700 font-medium">Mô tả</label>
-                <textarea id="description" name="description" rows="3" class="w-full border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200
-                        @error('description') border-red-500 @enderror"
+                <textarea id="description" name="description" rows="3"
+                    class="w-full border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 @error('description') border-red-500 @enderror"
                     placeholder="Nhập mô tả">{{ old('description') }}</textarea>
                 @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -44,8 +46,7 @@
                 <label for="status" class="block text-gray-700 font-medium">Trạng thái <span
                         class="text-red-500">*</span></label>
                 <select id="status" name="status"
-                    class="w-full border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200
-                                                                                           @error('status') border-red-500 @enderror">
+                    class="w-full border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 @error('status') border-red-500 @enderror">
                     <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Hiển thị</option>
                     <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Ẩn</option>
                 </select>
@@ -56,7 +57,7 @@
 
             <!-- Nút bấm -->
             <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
-                💾 Tạo danh mục
+                <i class="fas fa-save mr-2"></i> Tạo danh mục
             </button>
         </form>
     </div>
